@@ -2,17 +2,18 @@
 
 ## Description
 
-Simple app in which a user can create a post (title only!) and then create comments on the post, and display them under the post title.
+Simple app in which a user can create a post (title only!) and then create comments on the post, and have them displayed under the post title.
 
 - Example screenshot:
   ![screenshot1](./client/public/screenshots/example-screenshot.png)
 
 ## Project structure
 
-The project currentlyt contains 2 services:
+The project currently contains 3 services:
 
 - posts (port 4000)
 - comments (port 4001)
+- query (port 4002)
 
 an event broker:
 
@@ -26,7 +27,7 @@ All posts and comments are held in memory. The browser must be refreshed for pos
 
 ## How it works
 
-Each time a post is submitted, it is stored in memory and it emits an event to the event bus. The event is picked up by the event bus which then sends it back to the service it originated from and to all of the other services.
+Each time a post is submitted, it is stored in memory and an event is emitted to the event bus. The event is picked up by the event bus which then sends it back to the service it originated from and to all of the other services. The other services then deal with the event, and in the case of the query service, it stores the information about the event. The client front end then, in a single request, is able to populate the view with all of the current posts and comments.
 
 ## Getting started
 

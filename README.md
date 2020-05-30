@@ -9,7 +9,7 @@ Simple app in which a user can create a post (title only!) and then create comme
 
 ## Project structure
 
-The project contains 2 services:
+The project currentlyt contains 2 services:
 
 - posts (port 4000)
 - comments (port 4001)
@@ -22,11 +22,11 @@ and a react front end
 
 - client (port 3000)
 
-All posts and comments are held in memory. Screen must be refreshed for posts and comments to appear.
+All posts and comments are held in memory. The browser must be refreshed for posts and comments to appear.
 
-## How is works
+## How it works
 
-Each time a post is submitted, it is stored in memory and an event is triggered sending a request to the event bus. The event is picked up by the event bus which then sends it back to the service it originated from and to all the other services.
+Each time a post is submitted, it is stored in memory and it emits an event to the event bus. The event is picked up by the event bus which then sends it back to the service it originated from and to all of the other services.
 
 ## Getting started
 

@@ -27,7 +27,20 @@ All posts and comments are held in memory. The browser must be refreshed for pos
 
 ## How it works
 
-Each time a post is submitted, it is stored in memory and an event is emitted to the event bus. The event is picked up by the event bus which then sends it back to the service it originated from and to all of the other services. The other services then deal with the event, and in the case of the query service, it stores the information about the event. The client front end then, in a single request, is able to populate the view with all of the current posts and comments.
+Each time a post is submitted, it is stored in memory and an event is emitted to the event bus. The event is picked up by the event bus which then sends it back to the service it originated from and to all of the other services. The other services then deal with the event, and in the case of the query service, it stores the information about the event in a data structure like this:
+
+```javascript
+posts ===
+  {
+    j123kw: {
+      id: "j123kw",
+      title: "post title",
+      comments: [{ id: "kle9yd", content: "comment!" }],
+    },
+  };
+```
+
+The react front end then makes a single request to the query service and is able to use the data structure that is returned to populate the view with all of the current posts and comments.
 
 ## Getting started
 

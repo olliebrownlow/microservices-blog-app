@@ -85,6 +85,8 @@ In reality, part two happens so quickly that, unless the moderation service is d
 
 ![screenshot1](./client/public/screenshots/all-three-comment-statuses.png)
 
+The problem with this is that when a service (like the query service) is down, any events that occur during that period are in danger of being missed and therefore lost by the time the service comes back on line. To mitigate for this, the event-bus is also given a datastore, and the broken query service can ask for all of this data when it first comes back online, and finish processing any missed events.
+
 ## Getting started
 
 Clone this repository, navigate into each sub folder in a **separate** command line console and run `npm start`. This will start each service and allow them to communicate with each other as you create and post comments and blog post titles.

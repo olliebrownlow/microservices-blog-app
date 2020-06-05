@@ -15,6 +15,16 @@ Phrase shown to user for each flag:
 - `rejected`: "This comment has been deleted"
 - `approved`: original comment is shown
 
+## Tech stack
+
+- React
+- Express
+- Nodemon
+- Axios
+- Cors
+- Bootstrap
+- Docker
+
 ## Project structure
 
 The project currently contains 4 services:
@@ -91,11 +101,12 @@ The problem with this is that when a service (like the query service) is down, a
 
 Clone this repository, navigate into each sub folder in a **separate** command line console and run `npm start`. This will start each service and allow them to communicate with each other as you create and post comments and blog post titles.
 
-## Tech stack
+## Docker
 
-- React
-- Express
-- Nodemon
-- Axios
-- Cors
-- Bootstrap
+### Intro
+
+Each module (service or frontend) contains a Dockerfile which can be used to create a docker image of that module, which can then be run in a docker container.
+
+### Creating docker images and containers
+
+If you have not already done so, clone this repository, navigate into each sub folder in a **separate** command line console and run `docker build .` to create the image. The image id will be printed in the console. Start up and run the service in a docker container by running `docker run <image-id>`.

@@ -97,16 +97,22 @@ In reality, part two happens so quickly that, unless the moderation service is d
 
 The problem with this is that when a service (like the query service) is down, any events that occur during that period are in danger of being missed and therefore lost by the time the service comes back on line. To mitigate for this, the event-bus is also given a datastore, and the broken query service can ask for all of this data when it first comes back online, and finish processing any missed events.
 
-## Getting started
-
-Clone this repository, navigate into each sub folder in a **separate** command line console and run `npm start`. This will start each service and allow them to communicate with each other as you create and post comments and blog post titles.
-
-## Docker
+## Docker and Kubernetes
 
 ### Intro
 
 Each module (service or frontend) contains a Dockerfile which can be used to create a docker image of that module, which can then be run in a docker container.
 
+Each service and the event-bus has a kubernetes deployment yaml config file to create the infrastructure necessary for each of these parts of the programme to communicate with one another in the ways set out in earlier sections above.
+
+Once the application is up and running, each module will be running once, each in a separate pod and all part of one node, the only node in the cluster.
+
 ### Creating docker images and containers
 
-If you have not already done so, clone this repository, navigate into each sub folder in a **separate** command line console and run `docker build .` to create the image. The image id will be printed in the console. Start up and run the service in a docker container by running `docker run <image-id>`.
+**_Make sure you are signed into your Docker account and running Docker and Kubernetes_**
+
+Clone this repository, navigate into each sub folder in turn in your command line console of choice and run `docker build -t <your-docker-username>/<name-of-the-service> .` to create a docker image for each one. Push these images to your docker hub account: `docker push <your-docker-username>/<name-of-the-service>`.
+
+### Creating a Kubernetes cluster
+
+Navigate to the `blog-app/infra/k8s` directory and run `kubectl apply -f .`. This should create and start up all of the images in separate pods, each with a clusterIp service. Check that all the pods and Kubernetes services are running with `kubectl get pods` and `kubectl get services`.

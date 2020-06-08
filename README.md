@@ -113,6 +113,10 @@ Once the application is up and running, each module will be running once, each i
 
 Clone this repository, navigate into each sub folder in turn in your command line console of choice and run `docker build -t <your-docker-username>/<name-of-the-service> .` to create a docker image for each one. Push these images to your docker hub account: `docker push <your-docker-username>/<name-of-the-service>`.
 
-### Creating a Kubernetes cluster
+### Creating a Kubernetes cluster and using the app
 
-Navigate to the `blog-app/infra/k8s` directory and run `kubectl apply -f .`. This should create and start up all of the images in separate pods, each with a clusterIp service. Check that all the pods and Kubernetes services are running with `kubectl get pods` and `kubectl get services`.
+- Navigate to the `blog-app/infra/k8s` directory and in each of the depl.yaml files, wherever you see my docker username (olliebrownlow) change it to your own docker username.
+- Run `kubectl apply -f .`. This should create and start up all of the images in separate pods, each with a clusterIp service.
+- Check that all the pods and Kubernetes services are running with the commands `kubectl get pods` and `kubectl get services`.
+- In your text editor, open the hosts file on your computer (C:\Windows\System32\Drivers\etc\hosts on Windows or /etc/hosts on MacOS/Linux) and add this line to the end: 127.0.0.1 posts.com. This will force your operating system to connect to itself, your local machine, every time you try to browse to posts.com.
+- Navigate to posts.com in your browser of choice and you should be able to use the app.

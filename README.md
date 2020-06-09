@@ -103,7 +103,9 @@ The problem with this is that when a service (like the query service) is down, a
 
 Each module (service or frontend) contains a Dockerfile which can be used to create a docker image of that module, which can then be run in a docker container.
 
-Each service and the event-bus has a kubernetes deployment yaml config file to create the infrastructure necessary for each of these parts of the programme to communicate with one another in the ways set out in earlier sections above.
+Each module has a kubernetes deployment yaml config file to create the infrastructure necessary for each of these parts of the programme to communicate with one another in the ways set out in earlier sections above.
+
+The application also contains an NGINX Ingress controller (see the ingress-srv.yaml file in the infra\k8s folder) to aid with communication from the world outside the cluster.
 
 Once the application is up and running, each module will be running once, each in a separate pod and all part of one node, the only node in the cluster.
 
@@ -114,6 +116,8 @@ Once the application is up and running, each module will be running once, each i
 Clone this repository, navigate into each sub folder in turn in your command line console of choice and run `docker build -t <your-docker-username>/<name-of-the-service> .` to create a docker image for each one. Push these images to your docker hub account: `docker push <your-docker-username>/<name-of-the-service>`.
 
 ### Creating a Kubernetes cluster and using the app
+
+Make sure to follow the [NGINX Ingress Controller installation guide](https://kubernetes.github.io/ingress-nginx/deploy/#provider-specific-steps) before running the following steps:
 
 - Navigate to the `blog-app/infra/k8s` directory and in each of the depl.yaml files, wherever you see my docker username (olliebrownlow) change it to your own docker username.
 - Run `kubectl apply -f .`. This should create and start up all of the images in separate pods, each with a clusterIp service.

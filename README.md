@@ -113,7 +113,7 @@ Once the application is up and running, each module will be running once, each i
 
 **_Make sure you are signed into your Docker account and running Docker and Kubernetes_**
 
-Clone this repository, navigate into each sub folder in turn in your command line console of choice and run `docker build -t <your-docker-username>/<name-of-the-service> .` to create a docker image for each one. Push these images to your docker hub account: `docker push <your-docker-username>/<name-of-the-service>`.
+Clone this repository, navigate into each sub folder in turn in your command line console of choice and run `docker build -t <your-docker-username>/<name-of-the-service> .` (e.g. `docker build -t ollie/posts .`) to create a docker image for each one. Push these images to your docker hub account: `docker push <your-docker-username>/<name-of-the-service>` (e.g. `docker push ollie/posts`).
 
 ### Creating a Kubernetes cluster and using the app
 
@@ -124,3 +124,11 @@ Make sure to follow the [NGINX Ingress Controller installation guide](https://ku
 - Check that all the pods and Kubernetes services are running with the commands `kubectl get pods` and `kubectl get services`.
 - In your text editor, open the hosts file on your computer (C:\Windows\System32\Drivers\etc\hosts on Windows or /etc/hosts on MacOS/Linux) and add this line to the end: 127.0.0.1 posts.com. This will force your operating system to connect to itself, your local machine, every time you try to browse to posts.com.
 - Navigate to posts.com in your browser of choice and you should be able to use the app.
+
+### Making changes
+
+After making any changes to the code, the following steps must be carried out to make them effective:
+
+- Rebuild any relevant images (for modules where the code has been changed): `docker build -t <your-docker-username>/<name-of-the-service> .`
+- Push the image to Docker hub: `docker push <your-docker-username>/<name-of-the-service>`
+- Run `kubectl rollout restart deployment [depl_name]` to redeploy.

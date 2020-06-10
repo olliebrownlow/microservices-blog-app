@@ -139,4 +139,4 @@ After making any changes to the code, the following steps must be carried out to
 
 [Skaffold](https://skaffold.dev/) can do all of the above for you automatically whenever you make changes to your code. To do so:
 
-- Run `skaffold dev` from the root directory of the project (where the skaffold.yaml file is located).
+- Run `skaffold dev` from the root directory of the project (where the skaffold.yaml file is located). If you make any changes to the code and they are not detected triggering a rebuild and redeployment, you can try `skaffold dev --trigger polling`.

@@ -109,6 +109,8 @@ The application also contains an NGINX Ingress controller (see the ingress-srv.y
 
 Once the application is up and running, each module will be running once, each in a separate pod and all part of one node, the only node in the cluster.
 
+If you use Skaffold you can skip to the [Using Skaffold section](###using-skaffold-instead).
+
 ### Creating docker images and containers
 
 **_Make sure you are signed into your Docker account and running Docker and Kubernetes_**
@@ -132,3 +134,9 @@ After making any changes to the code, the following steps must be carried out to
 - Rebuild any relevant images (for modules where the code has been changed): `docker build -t <your-docker-username>/<name-of-the-service> .`
 - Push the image to Docker hub: `docker push <your-docker-username>/<name-of-the-service>`
 - Run `kubectl rollout restart deployment [depl_name]` to redeploy.
+
+### Using Skaffold instead
+
+[Skaffold](https://skaffold.dev/) can do all of the above for you automatically whenever you make changes to your code. To do so:
+
+- Run `skaffold dev` from the root directory of the project (where the skaffold.yaml file is located).
